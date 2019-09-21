@@ -1,15 +1,17 @@
+import os
+
 from instapy import InstaPy
 from instapy.util import smart_run
 
 # Write your automation here
 # Stuck ? Look at the github page or the examples in the examples folder
+if os.environ.get('USERNAME') and os.environ.get('PASSWORD'):
+    insta_username = os.environ['USERNAME']
+    insta_password = OS.environ['PASSWORD']
 
-insta_username = ''
-insta_password = ''
-
-dont_like = ['food', 'girl', 'hot']
+# dont_like = ['food', 'girl', 'hot']
 ignore_words = ['pizza']
-friend_list = ['friend1', 'friend2', 'friend3']
+comment_list = ['I love this one!', 'Nice shot!', 'I like it so much']
 
 # If you want to enter your Instagram Credentials directly just enter
 # username=<your-username-here> and password=<your-password> into InstaPy
@@ -25,9 +27,9 @@ with smart_run(bot):
                                 min_followers=45,
                                 min_following=77)
     bot.set_do_comment(True, percentage=10)
-    bot.set_comments(['Cool!', 'Awesome!', 'Nice!'])
-    bot.set_dont_include(friend_list)
-    bot.set_dont_like(dont_like)
+    bot.set_comments(comment_list)
+    # bot.set_dont_include(friend_list)
+    # bot.set_dont_like(dont_like)
     bot.set_ignore_if_contains(ignore_words)
-    bot.like_by_tags(['dog', '#cat'], amount=100)
+    bot.like_by_tags(['bcn', '#barcelona'], amount=100)
     bot.end()

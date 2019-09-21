@@ -36,13 +36,11 @@ services:
     build:
       context: .
       dockerfile: ./compose/local/instapy/Dockerfile
-    image: autogram_local_instapy
-    env_file:
-      - ./.envs/.local/.instapy
+    container_name: autogram_local_instapy
     environment:
+      - COMPOSE_PROJECT_NAME=autogram
       - PYTHONUNBUFFERED=0
       - INSTAPY_WORKSPACE=/code/InstaPy
-      - COMPOSE_PROJECT_NAME=instapy
     volumes:
       - ./:/code
 
