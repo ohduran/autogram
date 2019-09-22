@@ -7,7 +7,7 @@ from instapy.util import smart_run
 # Stuck ? Look at the github page or the examples in the examples folder
 if os.environ.get('USERNAME') and os.environ.get('PASSWORD'):
     insta_username = os.environ['USERNAME']
-    insta_password = OS.environ['PASSWORD']
+    insta_password = os.environ['PASSWORD']
 
 # dont_like = ['food', 'girl', 'hot']
 ignore_words = ['pizza']

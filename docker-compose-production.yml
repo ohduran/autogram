@@ -34,16 +34,11 @@ services:
     build:
       context: .
       dockerfile: ./compose/production/instapy/Dockerfile
-    image: autogram_production_instapy
-    environment:
-      - PYTHONUNBUFFERED=0
-      - INSTAPY_WORKSPACE=/code/InstaPy
-      - COMPOSE_PROJECT_NAME=instapy
-    volumes:
-      - ./:/code
+    container_name: autogram_production_instapy
     env_file:
       - ./.envs/.production/.instapy
-
+    volumes:
+      - ./:/code
   traefik:
     build:
       context: .

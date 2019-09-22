@@ -276,3 +276,14 @@ autogram/media/
 .ipython/
 .env
 .envs/*
+
+
+# Instapy stuff
+# Ignore InstaPy directory
+InstaPy
+
+# Ignore docker_quickstart.py
+docker_quickstart.py
+
+# Geckodriver log file
+geckodriver.log
