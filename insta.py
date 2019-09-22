@@ -12,7 +12,7 @@ if os.environ.get('USERNAME') and os.environ.get('PASSWORD'):
 # dont_like = ['food', 'girl', 'hot']
 ignore_words = ['pizza']
 comment_list = ['I love this one!', 'Nice shot!', 'I like it so much']
-
+follow_and_like_tag_list = ['bcn', '#barcelona', '#barcelonaspain', '#barcelonaspain🇪🇸']
 # If you want to enter your Instagram Credentials directly just enter
 # username=<your-username-here> and password=<your-password> into InstaPy
 # e.g like so InstaPy(username="instagram", password="test1234")
@@ -26,10 +26,10 @@ with smart_run(bot):
                                 max_following=5555,
                                 min_followers=45,
                                 min_following=77)
-    bot.set_do_comment(True, percentage=10)
+    bot.set_do_comment(True, percentage=1)
     bot.set_comments(comment_list)
-    # bot.set_dont_include(friend_list)
-    # bot.set_dont_like(dont_like)
+    bot.set_quota_supervisor(enabled=True, peak_follows_daily=560, peak_follows_hourly=56, peak_unfollows_hourly=49, peak_unfollows_daily=550, sleep_after=["follows_h", "unfollows_d"], stochastic_flow=True, notify_me=True)
+    bot.set_dont_unfollow_active_users(enabled=True, posts=5)
     bot.set_ignore_if_contains(ignore_words)
-    bot.like_by_tags(['bcn', '#barcelona'], amount=100)
-    bot.end()
+    bot.like_by_tags(follow_and_like_tag_list, amount=100)
+    bot.follow_by_tags(follow_and_like_tag_list, amount=10)

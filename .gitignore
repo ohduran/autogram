@@ -287,3 +287,6 @@ docker_quickstart.py
 
 # Geckodriver log file
 geckodriver.log
+
+# User fixtures
+autogram/users/fixtures/*
