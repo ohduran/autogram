@@ -15,7 +15,11 @@ class OwnerQuerySet(models.QuerySet):
 class Owner(HasUser, models.Model):
 
     username = models.CharField(unique=True, max_length=30)
+    instagram_id = models.CharField(max_length=30)
     flagged = models.BooleanField(default=False)
 
     def flag(self):
         return self.update(flagged=True)
+
+    def __str__(self):
+        return f"@{self.username}"

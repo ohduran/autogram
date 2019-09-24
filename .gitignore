@@ -290,3 +290,6 @@ geckodriver.log
 
 # User fixtures
 autogram/users/fixtures/*
+
+# Scraped Media
+scraped_media/*

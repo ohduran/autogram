@@ -1,9 +1,9 @@
 from django.db import models
 
-from ..commons.models import HasUser
+from ..commons.models import HasUser, RandomQuerySet
 
 
-class PictureQuerySet(models.QuerySet):
+class PictureQuerySet(RandomQuerySet, models.QuerySet):
     pass
 
 

@@ -1,11 +1,14 @@
 import subprocess
 
-from django.core.management import call_command
+from django.contrib.auth import get_user_model
 from django.core.management.base import BaseCommand
+
+User = get_user_model()
 
 
 class Command(BaseCommand):
     help = 'Pulls media from instagram into the scraped_media folder'
+    requires_migrations_checks = True
 
     def add_arguments(self, parser):
         """python manage.py scrapmedia demo_ig_scraper"""
@@ -21,9 +24,10 @@ class Command(BaseCommand):
 
         for owner in options['owners']:
             bot = User.objects.first()
-            bash_command = command_template.format(bot.username, bot.password, owner)
+            bash_command = command_template.format(bot.username, bot.para, owner)
+            self.stdout.write(self.style.WARNING(f'Now running {bash_command}'))
             process = subprocess.Popen(bash_command.split(), stdout=subprocess.PIPE)
             output, error = process.communicate()
             if not error:
-                # call_command('loadscrapedmedia', 'scraped_media/{}.json'.format(owner))
-                self.stdout.write(self.style.SUCCESS('SUCCESS'))
+                self.stdout.write(self.style.WARNING('Loading scraped media'))
+                # call_command('loadmedia', 'scraped_media/{}.json'.format(owner))
