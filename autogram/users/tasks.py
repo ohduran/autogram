@@ -14,4 +14,4 @@ def upload_picture():
     caption = user.caption_set.least_used().random().get()
 
     with InstagramBot(bot=user) as instabot:
-        instabot.uploadPhoto(picture, caption=caption)
+        instabot.uploadPicture(picture=picture, caption=caption)

@@ -33,15 +33,16 @@ class InstagramBot(InstagramAPI):
     def __exit__(self, exc_type, exc_val, exc_tb):
         log.info('Exiting Instagram session')
 
-    def uploadPhoto(self, picture, caption=None, upload_id=None, is_sidecar=None):
+    def uploadPicture(self, picture, caption):
         caption_full_text = """{caption}\n\n\n
 Great 📸 by {owner}! Thanks for sharing\n\n\n\n\n\n\n\n\n\n\n\n
 #barcelona #sightsofbcn #bcn\n\n\n
 """.format(caption=caption.text, owner=str(picture.owner))
-        super().uploadPhoto(picture.path, caption_full_text, upload_id, is_sidecar)
-        picture.times_used = F('times_used') + 1
-        picture.save()
+        uploaded = self.uploadPhoto(picture.path, caption_full_text, upload_id=None, is_sidecar=None)
+        if uploaded:
+            picture.times_used = F('times_used') + 1
+            picture.save()
 
-        caption.times_used = F('times_used') + 1
-        caption.save()
-        log.info('Picture uploaded!')
+            caption.times_used = F('times_used') + 1
+            caption.save()
+            log.info('Picture uploaded!')
