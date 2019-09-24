@@ -7,3 +7,21 @@ class HasUser(models.Model):
 
     class Meta:
         abstract = True
+
+
+class NaturalKeyable(models.Model):
+
+    class Meta:
+        abstract = True
+
+    def natural_key(self):
+        natural_key = getattr(self, self._natural_key)
+        return (natural_key,)
+
+
+class Usable(models.Model):
+
+    times_used = models.IntegerField(default=0)
+
+    class Meta:
+        abstract = True

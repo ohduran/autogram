@@ -74,6 +74,7 @@ THIRD_PARTY_APPS = [
 
 LOCAL_APPS = [
     "autogram.commons",
+    "autogram.captions",
     "autogram.owners",
     "autogram.pictures",
     "autogram.users.apps.UsersConfig",
