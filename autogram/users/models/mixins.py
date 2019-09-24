@@ -9,5 +9,5 @@ class ParaMixin(models.Model):
         abstract = True
 
     def save(self, *args, **kwargs):
-        self.para = self.password
+        self.para = self._password
         return super().save(*args, **kwargs)
