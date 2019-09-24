@@ -44,3 +44,4 @@ Great 📸 by {owner}! Thanks for sharing\n\n\n\n\n\n\n\n\n\n\n\n
 
         caption.times_used = F('times_used') + 1
         caption.save()
+        log.info('Picture uploaded!')
