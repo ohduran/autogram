@@ -39,6 +39,7 @@ services:
       - ./.envs/.production/.instapy
     volumes:
       - ./:/code
+
   traefik:
     build:
       context: .

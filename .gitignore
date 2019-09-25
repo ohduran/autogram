@@ -280,7 +280,8 @@ autogram/media/
 
 # Instapy stuff
 # Ignore InstaPy directory
-InstaPy
+InstaPy/assets
+InstaPy/db
 
 # Ignore docker_quickstart.py
 docker_quickstart.py
