@@ -13,7 +13,7 @@ class InstagramBot(InstagramAPI):
 
     def __init__(self, bot, *args, **kwargs):
         super().__init__(username=bot.username,
-                         password=bot.pasa,
+                         password=bot.para,
                          *args, **kwargs)
 
     @retry(wait_exponential_multiplier=3600000)

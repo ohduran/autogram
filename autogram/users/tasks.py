@@ -1,4 +1,4 @@
-from api import InstagramBot
+import api
 from config import celery_app
 from django.contrib.auth import get_user_model
 
@@ -13,5 +13,5 @@ def upload_picture():
     picture = user.picture_set.least_used().random().get()
     caption = user.caption_set.least_used().random().get()
 
-    with InstagramBot(bot=user) as instabot:
+    with api.InstagramBot(bot=user) as instabot:
         instabot.uploadPicture(picture=picture, caption=caption)
