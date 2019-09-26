@@ -30,4 +30,4 @@ class Command(BaseCommand):
             output, error = process.communicate()
             if not error:
                 self.stdout.write(self.style.WARNING('Loading scraped media'))
-                # call_command('loadmedia', 'scraped_media/{}.json'.format(owner))
+                call_command('loadmedia', 'scraped_media/{}.json'.format(owner))
