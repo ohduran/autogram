@@ -7,7 +7,7 @@ User = get_user_model()
 
 @celery_app.task()
 def upload_picture():
-    """Upload a picture to Instagram."""
+    """Upload a random picture to Instagram."""
     user = User.objects.first()
 
     picture = user.picture_set.least_used().random().get()

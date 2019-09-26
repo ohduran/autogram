@@ -38,11 +38,12 @@ class InstagramBot(InstagramAPI):
 Great 📸 by {owner}! Thanks for sharing\n\n\n\n\n\n\n\n\n\n\n\n
 #barcelona #sightsofbcn #bcn\n\n\n
 """.format(caption=caption.text, owner=str(picture.owner))
-        uploaded = self.uploadPhoto(picture.path, caption_full_text, upload_id=None, is_sidecar=None)
-        if uploaded:
-            picture.times_used = F('times_used') + 1
-            picture.save()
+        self.uploadPhoto(picture.path, caption_full_text, upload_id=None, is_sidecar=None)
+        log.info(f'Picture by {picture.owner} uploaded')
+        log.info(f'Caption used: {caption.text}')
+        picture.times_used = F('times_used') + 1
+        picture.save()
 
-            caption.times_used = F('times_used') + 1
-            caption.save()
-            log.info('Picture uploaded!')
+        caption.times_used = F('times_used') + 1
+        caption.save()
+        log.info('Picture uploaded!')
