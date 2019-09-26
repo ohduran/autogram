@@ -56,18 +56,14 @@ class Command(BaseCommand):
 
             self.stdout.write(self.style.SUCCESS(f"{loaded} pictures loaded"))
 
-
-
-
-
     def _picture_name(self, display_url):
-            name = findall('(?:\/e35\/)(\S+).jpg', display_url)
-            if not name:
-                return None
-            return name[0]
+        name = findall('(?:\/e35\/)(\S+).jpg', display_url)
+        if not name:
+            return None
+        return name[0]
 
     def _picture_owner(self, picture):
         caption_edges = picture['edge_media_to_caption'].get('edges')
         if caption_edges:
             caption = caption_edges[0]['node']['text']
-        return findall('(?:@)(\w+)', caption)[0] if findall('(?:@)(\w+)', caption) else picture['username']
+            return findall('(?:@)(\w+)', caption)[0] if findall('(?:@)(\w+)', caption) else picture['username']

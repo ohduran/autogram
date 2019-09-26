@@ -29,5 +29,5 @@ class Command(BaseCommand):
             process = subprocess.Popen(bash_command.split(), stdout=subprocess.PIPE)
             output, error = process.communicate()
             if not error:
-                self.stdout.write(self.style.WARNING('Loading scraped media'))
+                self.stdout.write(self.style.WARNING('Loading scraped media from scraped_media/{}.json'.format(owner)))
                 call_command('loadmedia', 'scraped_media/{}.json'.format(owner))
