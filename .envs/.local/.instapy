@@ -1,0 +1,4 @@
+USERNAME=sightsofbcn
+PASSWORD=monsterenergy
+PYTHONUNBUFFERED=0
+INSTAPY_WORKSPACE=/code/InstaPy
