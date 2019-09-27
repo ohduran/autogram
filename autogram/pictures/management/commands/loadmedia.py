@@ -42,21 +42,25 @@ class Command(BaseCommand):
 
                 picture_name = self._picture_name(picture['display_url'])
                 try:
-                    with open(f'scraped_media/{picture_name}.jpg', 'rb') as file:
-                        picture_data = {
-                            'likes': picture['edge_media_preview_like']['count'],
-                            'comments': picture['edge_media_to_comment']['count'],
-                            'owner': owner,
-                            'user': user,
-                        }
-                        try:
-                            picture, created = Picture.objects.update_or_create(name=picture_name, defaults=picture_data)
+                    if picture_name:
+                        with open(f'scraped_media/{picture_name}.jpg', 'rb') as file:
+                            picture_data = {
+                                'likes': picture['edge_media_preview_like']['count'],
+                                'comments': picture['edge_media_to_comment']['count'],
+                                'owner': owner,
+                                'user': user,
+                            }
+                            try:
+                                picture, created = Picture.objects.update_or_create(name=picture_name, defaults=picture_data)
 
-                            if created:
-                                picture.file.save(picture_name, ContentFile(file.read()))
-                                loaded += 1
-                        except IntegrityError:
-                            self.stdout.write(self.style.WARNING('Attempt to upload a picture without name'))
+                                if created:
+                                    try:
+                                        picture.file.save(picture_name, ContentFile(file.read()))
+                                        loaded += 1
+                                    except Exception as exc:
+                                        self.stdout.write(self.style.ERROR(f'Failed: {exc} for picture {picture_name}'))
+                            except IntegrityError:
+                                self.stdout.write(self.style.WARNING('Attempt to upload a picture without name'))
                 except FileNotFoundError:
                     pass
             self.stdout.write(self.style.SUCCESS(f"{loaded} pictures loaded"))
