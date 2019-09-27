@@ -2,6 +2,7 @@ from json import load
 from re import findall
 
 from django.contrib.auth import get_user_model
+from django.core.files.base import ContentFile
 from django.core.management.base import BaseCommand
 from django.db import transaction
 from django.db.utils import IntegrityError
@@ -40,20 +41,24 @@ class Command(BaseCommand):
                 owner, _ = Owner.objects.update_or_create(**owner_data)
 
                 picture_name = self._picture_name(picture['display_url'])
-                picture_data = {
-                    'likes': picture['edge_media_preview_like']['count'],
-                    'comments': picture['edge_media_to_comment']['count'],
-                    'owner': owner,
-                    'user': user
-                }
                 try:
-                    picture, created = Picture.objects.update_or_create(name=picture_name, defaults=picture_data)
+                    with open(f'scraped_media/{picture_name}.jpg', 'rb') as file:
+                        picture_data = {
+                            'likes': picture['edge_media_preview_like']['count'],
+                            'comments': picture['edge_media_to_comment']['count'],
+                            'owner': owner,
+                            'user': user,
+                        }
+                        try:
+                            picture, created = Picture.objects.update_or_create(name=picture_name, defaults=picture_data)
 
-                    if created:
-                        loaded += 1
-                except IntegrityError:
-                    self.stdout.write(self.style.WARNING('Attempt to upload a picture without name'))
-
+                            if created:
+                                picture.file.save(picture_name, ContentFile(file.read()))
+                                loaded += 1
+                        except IntegrityError:
+                            self.stdout.write(self.style.WARNING('Attempt to upload a picture without name'))
+                except FileNotFoundError:
+                    pass
             self.stdout.write(self.style.SUCCESS(f"{loaded} pictures loaded"))
 
     def _picture_name(self, display_url):

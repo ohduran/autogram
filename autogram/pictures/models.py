@@ -20,9 +20,11 @@ class Picture(HasUser, Usable, models.Model):
     likes = models.IntegerField(default=0)
     comments = models.IntegerField(default=0)
 
+    file = models.FileField(upload_to='pictures/')
+
     @property
     def path(self):
-        return join('scraped_media', self.name + '.jpg')
+        return self.file.path
 
     def __str__(self):
         return self.name
