@@ -38,20 +38,21 @@ class Command(BaseCommand):
                     'instagram_id': picture['owner']['id'],
                     'user': user
                 }
-                owner, _ = Owner.objects.update_or_create(**owner_data)
+                owner, _ = Owner.objects.get_or_create(username=owner_data['username'], defaults=owner_data)
 
                 picture_name = self._picture_name(picture['display_url'])
                 try:
                     if picture_name:
                         with open(f'scraped_media/{picture_name}.jpg', 'rb') as file:
                             picture_data = {
+                                'name': picture_name,
                                 'likes': picture['edge_media_preview_like']['count'],
                                 'comments': picture['edge_media_to_comment']['count'],
                                 'owner': owner,
                                 'user': user,
                             }
                             try:
-                                picture, created = Picture.objects.update_or_create(name=picture_name, defaults=picture_data)
+                                picture, created = Picture.objects.get_or_create(name=picture_name, defaults=picture_data)
 
                                 if created:
                                     try:
