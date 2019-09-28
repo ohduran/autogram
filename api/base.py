@@ -26,12 +26,16 @@ class InstagramBot(InstagramAPI):
         if not logged_in:
             if 'error_type' in self.LastJson and self.LastJson['error_type'] == 'sentry_block':
                 log.warning('You have been Sentry Blocked!')
+            elif 'message' in self.LastJson and self.LastJson['message'] == 'challenge_required':
+                log.warning('Challenge required')
+                raise Exception
             log.warning('You could not be logged in!')
         log.info('Logged in')
         return self
 
     def __exit__(self, exc_type, exc_val, exc_tb):
         log.info('Exiting Instagram session')
+        self.logout()
 
     def uploadPicture(self, picture, caption):
         caption_full_text = """{caption}\n\n\n
