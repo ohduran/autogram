@@ -2,6 +2,7 @@ import os
 
 from instapy import InstaPy
 from instapy.util import smart_run
+from selenium.common.exceptions import JavascriptException
 
 # Write your automation here
 # Stuck ? Look at the github page or the examples in the examples folder
@@ -49,6 +50,9 @@ while True:
                               random_range_to=140)  # 140%
         bot.set_dont_unfollow_active_users(enabled=True, posts=5)
         bot.set_ignore_if_contains(ignore_words)
-        bot.like_by_tags(follow_and_like_tag_list, amount=1000)
+        try:
+            bot.like_by_tags(follow_and_like_tag_list, amount=1000)
+        except JavascriptException:
+            pass
         bot.follow_by_tags(follow_and_like_tag_list, amount=400, interact=True)
         bot.unfollow_users(amount=400, allFollowing=True, style='RANDOM', unfollow_after=2*24*60)
