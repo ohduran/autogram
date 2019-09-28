@@ -49,6 +49,6 @@ while True:
                               random_range_to=140)  # 140%
         bot.set_dont_unfollow_active_users(enabled=True, posts=5)
         bot.set_ignore_if_contains(ignore_words)
-        # bot.like_by_tags(follow_and_like_tag_list, amount=1000)
-        # bot.follow_by_tags(follow_and_like_tag_list, amount=400, interact=True)
+        bot.like_by_tags(follow_and_like_tag_list, amount=1000)
+        bot.follow_by_tags(follow_and_like_tag_list, amount=400, interact=True)
         bot.unfollow_users(amount=400, allFollowing=True, style='RANDOM', unfollow_after=2*24*60)
