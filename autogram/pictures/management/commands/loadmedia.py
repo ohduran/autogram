@@ -38,7 +38,10 @@ class Command(BaseCommand):
                     'instagram_id': picture['owner']['id'],
                     'user': user
                 }
-                owner, _ = Owner.objects.get_or_create(username=owner_data['username'], defaults=owner_data)
+                try:
+                    owner, _ = Owner.objects.get_or_create(username=owner_data['username'], defaults=owner_data)
+                except IntegrityError:
+                    continue
 
                 picture_name = self._picture_name(picture['display_url'])
                 try:
