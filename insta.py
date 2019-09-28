@@ -52,7 +52,7 @@ while True:
         bot.set_ignore_if_contains(ignore_words)
         try:
             bot.like_by_tags(follow_and_like_tag_list, amount=1000)
-        except JavascriptException:
+        except (JavascriptException, TypeError):
             pass
         bot.follow_by_tags(follow_and_like_tag_list, amount=400, interact=True)
         bot.unfollow_users(amount=400, allFollowing=True, style='RANDOM', unfollow_after=2*24*60)
