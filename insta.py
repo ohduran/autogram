@@ -54,11 +54,11 @@ with smart_run(bot):
             bot.like_by_tags(follow_and_like_tag_list, amount=1000)
         except (JavascriptException, TypeError):
             pass
-        try:
-            bot.follow_by_tags(follow_and_like_tag_list, amount=400, interact=True)
-        except (JavascriptException, TypeError):
-            pass
-        try:
-            bot.unfollow_users(amount=400, allFollowing=True, style='RANDOM', unfollow_after=2*24*60)
-        except (JavascriptException, TypeError):
-            pass
+        # try:
+        #     bot.follow_by_tags(follow_and_like_tag_list, amount=400, interact=True)
+        # except (JavascriptException, TypeError):
+        #     pass
+        # try:
+        #     bot.unfollow_users(amount=400, allFollowing=True, style='RANDOM', unfollow_after=2*24*60)
+        # except (JavascriptException, TypeError):
+        #     pass
