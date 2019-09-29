@@ -54,6 +54,16 @@ with smart_run(bot):
             bot.like_by_tags(follow_and_like_tag_list, amount=1000)
         except (JavascriptException, TypeError):
             pass
+        try:
+            bot.set_do_story(enabled=True, percentage=70, simulate=False)
+        except (JavascriptException, TypeError):
+            pass
+        try:
+            bot.story_by_tags(follow_and_like_tag_list, amount=1000)
+        except (JavascriptException, TypeError):
+            pass
+
+
         # try:
         #     bot.follow_by_tags(follow_and_like_tag_list, amount=400, interact=True)
         # except (JavascriptException, TypeError):
