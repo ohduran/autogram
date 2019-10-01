@@ -27,7 +27,8 @@ with smart_run(bot):
                                 max_following=5555,
                                 min_followers=45,
                                 min_following=77)
-    bot.set_do_comment(True, percentage=1)
+    bot.set_do_comment(True, percentage=10)
+    bot.set_do_like(enabled=True, percentage=0)
     bot.set_comments(comment_list)
     bot.set_quota_supervisor(enabled=True,
                              peak_likes_hourly=40,

@@ -275,6 +275,7 @@ autogram/media/
 
 .ipython/
 .env
+.envs/.production/*
 
 
 # Instapy stuff
