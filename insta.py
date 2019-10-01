@@ -28,31 +28,30 @@ with smart_run(bot):
                                 min_followers=45,
                                 min_following=77)
     bot.set_do_comment(True, percentage=10)
-    bot.set_do_like(enabled=True, percentage=0)
     bot.set_comments(comment_list)
     bot.set_quota_supervisor(enabled=True,
-                             peak_likes_hourly=40,
-                             peak_likes_daily=500,
+                             peak_likes_hourly=20,
+                             peak_likes_daily=250,
                              peak_follows_daily=560,
                              peak_follows_hourly=56,
                              peak_unfollows_hourly=49,
                              peak_unfollows_daily=550,
-                             sleep_after=["follows_h", "unfollows_d", "likes_h"],
+                             sleep_after=["follows_h", "unfollows_d", "likes_h", "likes_d"],
                              stochastic_flow=True,
                              notify_me=True)
     bot.set_action_delays(enabled=True,
-                          like=3,
+                          like=60,
                           comment=5,
                           follow=4.5,
                           unfollow=28,
                           story=10,
-                          random_range_from=70,  # 70%
-                          random_range_to=140)  # 140%
+                          random_range_from=70,  # %
+                          random_range_to=130)  # %
     bot.set_dont_unfollow_active_users(enabled=True, posts=5)
     bot.set_ignore_if_contains(ignore_words)
     while True:
         try:
-            bot.like_by_tags(follow_and_like_tag_list, amount=1000)
+            bot.like_by_tags(follow_and_like_tag_list, amount=100)
         except (JavascriptException, TypeError):
             pass
         try:
@@ -60,7 +59,7 @@ with smart_run(bot):
         except (JavascriptException, TypeError):
             pass
         try:
-            bot.story_by_tags(follow_and_like_tag_list, amount=1000)
+            bot.story_by_tags(follow_and_like_tag_list, amount=100)
         except (JavascriptException, TypeError):
             pass
 
