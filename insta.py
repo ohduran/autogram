@@ -30,8 +30,8 @@ with smart_run(bot):
     bot.set_do_comment(True, percentage=10)
     bot.set_comments(comment_list)
     bot.set_quota_supervisor(enabled=True,
-                             peak_likes_hourly=40,
-                             peak_likes_daily=1000,
+                             peak_likes_hourly=20,
+                             peak_likes_daily=450,
                              peak_follows_daily=560,
                              peak_follows_hourly=56,
                              peak_unfollows_hourly=49,
