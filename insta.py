@@ -56,12 +56,11 @@ with smart_run(bot):
     bot.set_ignore_if_contains(ignore_words)
 
     while True:
-        follow_and_like_tag_list = shuffle(follow_and_like_tag_list)
         try:
             bot.like_by_tags(follow_and_like_tag_list, amount=50)
         except (JavascriptException, TypeError):
             logger.debug('Like by tags failed')
-        follow_and_like_tag_list = shuffle(follow_and_like_tag_list)
+        # follow_and_like_tag_list = shuffle(follow_and_like_tag_list)
         try:
             bot.follow_by_tags(follow_and_like_tag_list, amount=50, interact=True)
         except (JavascriptException, TypeError):
