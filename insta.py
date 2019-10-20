@@ -1,11 +1,13 @@
+import logging
 import os
+from random import shuffle
 
 from instapy import InstaPy
 from instapy.util import smart_run
 from selenium.common.exceptions import JavascriptException
 
-# Write your automation here
-# Stuck ? Look at the github page or the examples in the examples folder
+logger = logging.getLogger('instapy')
+
 if os.environ.get('USERNAME') and os.environ.get('PASSWORD'):
     insta_username = os.environ['USERNAME']
     insta_password = os.environ['PASSWORD']
@@ -49,15 +51,32 @@ with smart_run(bot):
                           random_range_to=130)  # %
     bot.set_dont_unfollow_active_users(enabled=True, posts=5)
     bot.set_ignore_if_contains(ignore_words)
+
     while True:
+        follow_and_like_tag_list = shuffle(follow_and_like_tag_list)
         try:
-            bot.like_by_tags(follow_and_like_tag_list, amount=500)
+            bot.like_by_tags(follow_and_like_tag_list, amount=50)
         except (JavascriptException, TypeError):
-            pass
+            logger.debug('Like by tags failed')
+        follow_and_like_tag_list = shuffle(follow_and_like_tag_list)
         try:
-            bot.set_do_story(enabled=True, percentage=70, simulate=False)
+            bot.follow_by_tags(follow_and_like_tag_list, amount=50, interact=True)
         except (JavascriptException, TypeError):
-            pass
+            logger.debug('Follow by tags failed')
+        try:
+            bot.unfollow_users(amount=60,
+                               instapy_followed_enabled=True,
+                               instapy_followed_param="all",
+                               style="FIFO",
+                               unfollow_after=90*60*60,
+                               sleep_delay=501)
+        except (JavascriptException, TypeError):
+            logger.debug('Unfollowing failed')
+
+        # try:
+        #     bot.set_do_story(enabled=True, percentage=70, simulate=False)
+        # except (JavascriptException, TypeError):
+        #     pass
         # try:
         #     bot.story_by_tags(follow_and_like_tag_list, amount=100)
         # except (JavascriptException, TypeError):
