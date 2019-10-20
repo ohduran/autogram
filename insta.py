@@ -14,11 +14,14 @@ if os.environ.get('USERNAME') and os.environ.get('PASSWORD'):
 
 # dont_like = ['food', 'girl', 'hot']
 ignore_words = ['llibertat']
-comment_list = ['I love this one!', 'Nice shot!', 'I like it so much']
+comment_list = ['I love this one!',
+                'Great shot!',
+                'Nice shot!',
+                'I like it so much',
+                'Love Barcelona!',
+                'Love the view so much!',
+                ]
 follow_and_like_tag_list = ['bcn', '#barcelona', '#barcelonaspain', '#barcelonaspain🇪🇸']
-# If you want to enter your Instagram Credentials directly just enter
-# username=<your-username-here> and password=<your-password> into InstaPy
-# e.g like so InstaPy(username="instagram", password="test1234")
 
 bot = InstaPy(username=insta_username, password=insta_password, headless_browser=True)
 with smart_run(bot):
@@ -64,12 +67,12 @@ with smart_run(bot):
         except (JavascriptException, TypeError):
             logger.debug('Follow by tags failed')
         try:
-            bot.unfollow_users(amount=60,
+            bot.unfollow_users(amount=50,
                                instapy_followed_enabled=True,
                                instapy_followed_param="all",
                                style="FIFO",
-                               unfollow_after=90*60*60,
-                               sleep_delay=501)
+                               unfollow_after=3*24*60*60,
+                               sleep_delay=500)
         except (JavascriptException, TypeError):
             logger.debug('Unfollowing failed')
 
@@ -81,7 +84,6 @@ with smart_run(bot):
         #     bot.story_by_tags(follow_and_like_tag_list, amount=100)
         # except (JavascriptException, TypeError):
         #     pass
-
 
         # try:
         #     bot.follow_by_tags(follow_and_like_tag_list, amount=400, interact=True)
