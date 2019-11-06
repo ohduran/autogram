@@ -51,7 +51,7 @@ with smart_run(bot):
                           unfollow=28,
                           story=10,
                           random_range_from=70,  # %
-                          random_range_to=130)  # %
+                          random_range_to=1000)  # %
     bot.set_dont_unfollow_active_users(enabled=True, posts=5)
     bot.set_ignore_if_contains(ignore_words)
 
