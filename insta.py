@@ -1,7 +1,7 @@
 import logging
 import os
 from random import shuffle
-
+from time import sleep
 from instapy import InstaPy
 from instapy.util import smart_run
 from selenium.common.exceptions import JavascriptException
@@ -32,10 +32,10 @@ with smart_run(bot):
                                 max_following=5555,
                                 min_followers=45,
                                 min_following=77)
-    bot.set_do_comment(True, percentage=10)
+    bot.set_do_comment(True, percentage=90)
     bot.set_comments(comment_list)
     bot.set_quota_supervisor(enabled=True,
-                             peak_likes_hourly=20,
+                             peak_likes_hourly=10,
                              peak_likes_daily=450,
                              peak_follows_daily=560,
                              peak_follows_hourly=56,
@@ -46,7 +46,7 @@ with smart_run(bot):
                              notify_me=True)
     bot.set_action_delays(enabled=True,
                           like=60,
-                          comment=5,
+                          comment=45,
                           follow=4.5,
                           unfollow=28,
                           story=10,
@@ -74,6 +74,10 @@ with smart_run(bot):
                                sleep_delay=500)
         except (JavascriptException, TypeError):
             logger.debug('Unfollowing failed')
+
+        logger.debug('Sleeping for 8 hours')
+        sleep(60*60*8)
+        logger.debug('Times up')
 
         # try:
         #     bot.set_do_story(enabled=True, percentage=70, simulate=False)
