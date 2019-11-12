@@ -22,7 +22,7 @@ comment_list = ['I love this one!',
                 'Love Barcelona!',
                 'Love the view so much!',
                 ]
-follow_and_like_tag_list = ['bcn', '#barcelona', '#barcelonaspain', '#barcelonaspain🇪🇸']
+follow_and_like_tag_list = ['#bcn', '#barcelona', '#barcelonaspain', '#barcelonaspain🇪🇸']
 
 bot = InstaPy(username=insta_username, password=insta_password, headless_browser=True)
 with smart_run(bot):
@@ -58,15 +58,17 @@ with smart_run(bot):
 
     while True:
         try:
+            shuffle(follow_and_like_tag_list)
             bot.like_by_tags(follow_and_like_tag_list, amount=50)
         except (JavascriptException, TypeError):
             logger.warning('Like by tags failed')
-        # follow_and_like_tag_list = shuffle(follow_and_like_tag_list)
         try:
+            shuffle(follow_and_like_tag_list)
             bot.follow_by_tags(follow_and_like_tag_list, amount=41, interact=True)
         except (JavascriptException, TypeError):
             logger.warning('Follow by tags failed')
         try:
+            shuffle(follow_and_like_tag_list)
             bot.unfollow_users(amount=41,
                                instapy_followed_enabled=True,
                                instapy_followed_param="all",
