@@ -2,6 +2,7 @@ import logging
 import os
 from random import shuffle
 from time import sleep
+
 from instapy import InstaPy
 from instapy.util import smart_run
 from selenium.common.exceptions import JavascriptException
@@ -36,20 +37,20 @@ with smart_run(bot):
     bot.set_comments(comment_list)
     bot.set_quota_supervisor(enabled=True,
                              peak_likes_hourly=10,
+                             peak_follows_hourly=10,
+                             peak_unfollows_hourly=10,
                              peak_likes_daily=450,
-                             peak_follows_daily=560,
-                             peak_follows_hourly=56,
-                             peak_unfollows_hourly=49,
-                             peak_unfollows_daily=550,
-                             sleep_after=["follows_h", "unfollows_d", "likes_h", "likes_d"],
+                             peak_follows_daily=450,
+                             peak_unfollows_daily=450,
+                             sleep_after=["follows_d", "unfollows_d", "likes_d", "follows_h", "unfollows_h", "likes_h"],
                              stochastic_flow=True,
                              notify_me=True)
     bot.set_action_delays(enabled=True,
                           like=60,
-                          comment=45,
-                          follow=4.5,
-                          unfollow=28,
-                          story=10,
+                          comment=59,
+                          follow=58,
+                          unfollow=57,
+                          story=56,
                           random_range_from=70,  # %
                           random_range_to=1000)  # %
     bot.set_dont_unfollow_active_users(enabled=True, posts=5)
@@ -59,25 +60,25 @@ with smart_run(bot):
         try:
             bot.like_by_tags(follow_and_like_tag_list, amount=50)
         except (JavascriptException, TypeError):
-            logger.debug('Like by tags failed')
+            logger.warning('Like by tags failed')
         # follow_and_like_tag_list = shuffle(follow_and_like_tag_list)
         try:
-            bot.follow_by_tags(follow_and_like_tag_list, amount=50, interact=True)
+            bot.follow_by_tags(follow_and_like_tag_list, amount=41, interact=True)
         except (JavascriptException, TypeError):
-            logger.debug('Follow by tags failed')
+            logger.warning('Follow by tags failed')
         try:
-            bot.unfollow_users(amount=50,
+            bot.unfollow_users(amount=41,
                                instapy_followed_enabled=True,
                                instapy_followed_param="all",
                                style="FIFO",
                                unfollow_after=3*24*60*60,
                                sleep_delay=500)
         except (JavascriptException, TypeError):
-            logger.debug('Unfollowing failed')
+            logger.warning('Unfollowing failed')
 
-        logger.debug('Sleeping for 8 hours')
+        logger.info('Sleeping for 8 hours')
         sleep(60*60*8)
-        logger.debug('Times up')
+        logger.info('Times up')
 
         # try:
         #     bot.set_do_story(enabled=True, percentage=70, simulate=False)

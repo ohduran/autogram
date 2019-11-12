@@ -8,7 +8,7 @@ RUN sed -i "s#deb http://deb.debian.org/debian buster main#deb http://deb.debian
       g++ \
       firefox-esr \
       firefoxdriver \
-    && wget -O '/tmp/requirements.txt' https://raw.githubusercontent.com/InstaPy/instapy-docker/master/requirements.txt \
+    && wget -O '/tmp/requirements.txt' https://raw.githubusercontent.com/ohduran/autogram/master/requirements/instapy.txt \
     && pip install --no-cache-dir -U -r /tmp/requirements.txt \
     && apt-get purge -y --auto-remove \
       gcc \
