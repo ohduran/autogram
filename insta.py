@@ -35,6 +35,7 @@ with smart_run(bot):
                                 min_following=77)
     bot.set_do_comment(True, percentage=90)
     bot.set_comments(comment_list)
+    session.set_do_follow(enabled=True, percentage=10, times=1)
     bot.set_quota_supervisor(enabled=True,
                              peak_likes_hourly=10,
                              peak_follows_hourly=10,
@@ -64,11 +65,6 @@ with smart_run(bot):
             logger.warning('Like by tags failed')
         try:
             shuffle(follow_and_like_tag_list)
-            bot.follow_by_tags(follow_and_like_tag_list, amount=41, interact=True)
-        except (JavascriptException, TypeError):
-            logger.warning('Follow by tags failed')
-        try:
-            shuffle(follow_and_like_tag_list)
             bot.unfollow_users(amount=41,
                                instapy_followed_enabled=True,
                                instapy_followed_param="all",
@@ -81,21 +77,3 @@ with smart_run(bot):
         logger.info('Sleeping for 8 hours')
         sleep(60*60*8)
         logger.info('Times up')
-
-        # try:
-        #     bot.set_do_story(enabled=True, percentage=70, simulate=False)
-        # except (JavascriptException, TypeError):
-        #     pass
-        # try:
-        #     bot.story_by_tags(follow_and_like_tag_list, amount=100)
-        # except (JavascriptException, TypeError):
-        #     pass
-
-        # try:
-        #     bot.follow_by_tags(follow_and_like_tag_list, amount=400, interact=True)
-        # except (JavascriptException, TypeError):
-        #     pass
-        # try:
-        #     bot.unfollow_users(amount=400, allFollowing=True, style='RANDOM', unfollow_after=2*24*60)
-        # except (JavascriptException, TypeError):
-        #     pass
