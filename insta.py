@@ -35,7 +35,7 @@ with smart_run(bot):
                                 min_following=77)
     bot.set_do_comment(True, percentage=90)
     bot.set_comments(comment_list)
-    session.set_do_follow(enabled=True, percentage=10, times=1)
+    bot.set_do_follow(enabled=True, percentage=10, times=1)
     bot.set_quota_supervisor(enabled=True,
                              peak_likes_hourly=10,
                              peak_follows_hourly=10,
