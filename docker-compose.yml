@@ -41,6 +41,12 @@ services:
       - ./.envs/.local/.instapy
     volumes:
       - ./:/code
+    depends_on:
+       - redis
+       - postgres
+       - django
+       - celeryworker
+       - celerybeat
 
   redis:
     image: redis:5.0
